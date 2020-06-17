@@ -1,0 +1,8 @@
+C:\Development\Jungle\JungleApi\JungleApi.Data\bin\Release\netstandard2.0\JungleApi.Data.deps.json
+C:\Development\Jungle\JungleApi\JungleApi.Data\bin\Release\netstandard2.0\JungleApi.Data.dll
+C:\Development\Jungle\JungleApi\JungleApi.Data\bin\Release\netstandard2.0\JungleApi.Data.pdb
+C:\Development\Jungle\JungleApi\JungleApi.Data\obj\Release\netstandard2.0\JungleApi.Data.csprojAssemblyReference.cache
+C:\Development\Jungle\JungleApi\JungleApi.Data\obj\Release\netstandard2.0\JungleApi.Data.AssemblyInfoInputs.cache
+C:\Development\Jungle\JungleApi\JungleApi.Data\obj\Release\netstandard2.0\JungleApi.Data.AssemblyInfo.cs
+C:\Development\Jungle\JungleApi\JungleApi.Data\obj\Release\netstandard2.0\JungleApi.Data.dll
+C:\Development\Jungle\JungleApi\JungleApi.Data\obj\Release\netstandard2.0\JungleApi.Data.pdb

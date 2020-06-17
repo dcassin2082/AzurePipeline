@@ -1,0 +1,12 @@
+C:\Development\Jungle\JungleApi\JungleApi.Services\bin\Release\netstandard2.0\JungleApi.Services.deps.json
+C:\Development\Jungle\JungleApi\JungleApi.Services\bin\Release\netstandard2.0\JungleApi.Services.dll
+C:\Development\Jungle\JungleApi\JungleApi.Services\bin\Release\netstandard2.0\JungleApi.Services.pdb
+C:\Development\Jungle\JungleApi\JungleApi.Services\bin\Release\netstandard2.0\JungleApi.Data.dll
+C:\Development\Jungle\JungleApi\JungleApi.Services\bin\Release\netstandard2.0\JungleApi.Data.pdb
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\JungleApi.Services.csprojAssemblyReference.cache
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\EFCorePluralizer.cs
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\JungleApi.Services.AssemblyInfoInputs.cache
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\JungleApi.Services.AssemblyInfo.cs
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\JungleApi.Services.csproj.CopyComplete
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\JungleApi.Services.dll
+C:\Development\Jungle\JungleApi\JungleApi.Services\obj\Release\netstandard2.0\JungleApi.Services.pdb

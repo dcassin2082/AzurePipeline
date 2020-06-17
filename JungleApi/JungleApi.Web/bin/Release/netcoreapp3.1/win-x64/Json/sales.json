@@ -1,0 +1,38 @@
+[
+  {
+    "year": 2020,
+    "id": 1,
+    "bikes": 75,
+    "components": 20,
+    "clothing": 3,
+    "accessories": 2,
+    "total": 100
+  },
+  {
+    "year": 2019,
+    "id": 1,
+    "bikes": 75,
+    "components": 20,
+    "clothing": 3,
+    "accessories": 2,
+    "total": 100
+  },
+  {
+    "year": 2018,
+    "id": 1,
+    "bikes": 75,
+    "components": 20,
+    "clothing": 3,
+    "accessories": 2,
+    "total": 100
+  },
+  {
+    "year": 2017,
+    "id": 1,
+    "bikes": 75,
+    "components": 20,
+    "clothing": 3,
+    "accessories": 2,
+    "total": 100
+  }
+]

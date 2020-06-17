@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <pre style="font-family:Consolas;font-size:13px;color:gainsboro;background:#1e1e1e;"><span style="color:#569cd6;">using</span>&nbsp;System;
+    <span style="color:#569cd6;">using</span>&nbsp;System<span style="color:#b4b4b4;">.</span>Collections<span style="color:#b4b4b4;">.</span>Generic;
+    <span style="color:#569cd6;">using</span>&nbsp;System<span style="color:#b4b4b4;">.</span>Linq;
+    <span style="color:#569cd6;">using</span>&nbsp;System<span style="color:#b4b4b4;">.</span>Threading<span style="color:#b4b4b4;">.</span>Tasks;
+    <span style="color:#569cd6;">using</span>&nbsp;Microsoft<span style="color:#b4b4b4;">.</span>AspNetCore<span style="color:#b4b4b4;">.</span>Http;
+    <span style="color:#569cd6;">using</span>&nbsp;Microsoft<span style="color:#b4b4b4;">.</span>AspNetCore<span style="color:#b4b4b4;">.</span>Mvc;
+    <span style="color:#569cd6;">using</span>&nbsp;Microsoft<span style="color:#b4b4b4;">.</span>EntityFrameworkCore;
+    <span style="color:#569cd6;">using</span>&nbsp;JungleApi<span style="color:#b4b4b4;">.</span>Services<span style="color:#b4b4b4;">.</span>Models;
+    <span style="color:#569cd6;">using</span>&nbsp;JungleApi<span style="color:#b4b4b4;">.</span>Services<span style="color:#b4b4b4;">.</span>Services;
+         
+    <span style="color:#569cd6;">namespace</span>&nbsp;JungleApi<span style="color:#b4b4b4;">.</span>Web<span style="color:#b4b4b4;">.</span>Controllers
+        &#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">Route</span>(<span style="color:#d69d85;">&quot;api/[controller]&quot;</span>)]
+        &nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">ApiController</span>]
+        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#569cd6;">class</span>&nbsp;<span style="color:#4ec9b0;">CustomersController</span>&nbsp;:&nbsp;<span style="color:#4ec9b0;">ControllerBase</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">private</span>&nbsp;<span style="color:#569cd6;">readonly</span>&nbsp;<span style="color:#b8d7a3;">ICustomerService</span>&nbsp;_customerService;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#4ec9b0;">CustomersController</span>(<span style="color:#b8d7a3;">ICustomerService</span>&nbsp;<span style="color:#9cdcfe;">customerService</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_customerService&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#9cdcfe;">customerService</span>;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;GET:&nbsp;api/Customers</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">HttpGet</span>]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#569cd6;">async</span>&nbsp;<span style="color:#4ec9b0;">Task</span>&lt;<span style="color:#4ec9b0;">ActionResult</span>&lt;<span style="color:#b8d7a3;">IEnumerable</span>&lt;<span style="color:#4ec9b0;">Customer</span>&gt;&gt;&gt;&nbsp;<span style="color:#dcdcaa;">GetCustomers</span>()
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">GetCustomers</span>();
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;GET:&nbsp;api/Customers/5</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">HttpGet</span>(<span style="color:#d69d85;">&quot;&#123;id&#125;&quot;</span>)]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#569cd6;">async</span>&nbsp;<span style="color:#4ec9b0;">Task</span>&lt;<span style="color:#4ec9b0;">ActionResult</span>&lt;<span style="color:#4ec9b0;">Customer</span>&gt;&gt;&nbsp;<span style="color:#dcdcaa;">GetCustomer</span>(<span style="color:#569cd6;">int</span>&nbsp;<span style="color:#9cdcfe;">id</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">var</span>&nbsp;<span style="color:#9cdcfe;">customer</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">GetCustomer</span>(<span style="color:#9cdcfe;">id</span>);
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">if</span>&nbsp;(<span style="color:#9cdcfe;">customer</span>&nbsp;<span style="color:#b4b4b4;">==</span>&nbsp;<span style="color:#569cd6;">null</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#dcdcaa;">NotFound</span>();
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#9cdcfe;">customer</span>;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;PUT:&nbsp;api/Customers/5</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;To&nbsp;protect&nbsp;from&nbsp;overposting&nbsp;attacks,&nbsp;enable&nbsp;the&nbsp;specific&nbsp;properties&nbsp;you&nbsp;want&nbsp;to&nbsp;bind&nbsp;to,&nbsp;for</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;more&nbsp;details,&nbsp;see&nbsp;https://go.microsoft.com/fwlink/?linkid=2123754.</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">HttpPut</span>(<span style="color:#d69d85;">&quot;&#123;id&#125;&quot;</span>)]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#569cd6;">async</span>&nbsp;<span style="color:#4ec9b0;">Task</span>&lt;<span style="color:#b8d7a3;">IActionResult</span>&gt;&nbsp;<span style="color:#dcdcaa;">PutCustomer</span>(<span style="color:#569cd6;">int</span>&nbsp;<span style="color:#9cdcfe;">id</span>,&nbsp;<span style="color:#4ec9b0;">Customer</span>&nbsp;<span style="color:#9cdcfe;">customer</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">if</span>&nbsp;(<span style="color:#9cdcfe;">id</span>&nbsp;<span style="color:#b4b4b4;">!=</span>&nbsp;<span style="color:#9cdcfe;">customer</span><span style="color:#b4b4b4;">.</span>CustomerId)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#dcdcaa;">BadRequest</span>();
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">try</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">PutCustomer</span>(<span style="color:#9cdcfe;">customer</span>);
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">catch</span>&nbsp;(<span style="color:#4ec9b0;">DbUpdateConcurrencyException</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">if</span>&nbsp;(<span style="color:#b4b4b4;">!</span>(<span style="color:#569cd6;">await</span>&nbsp;<span style="color:#dcdcaa;">CustomerExists</span>(<span style="color:#9cdcfe;">id</span>)))
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#dcdcaa;">NotFound</span>();
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">else</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">throw</span>;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#dcdcaa;">NoContent</span>();
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;POST:&nbsp;api/Customers</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;To&nbsp;protect&nbsp;from&nbsp;overposting&nbsp;attacks,&nbsp;enable&nbsp;the&nbsp;specific&nbsp;properties&nbsp;you&nbsp;want&nbsp;to&nbsp;bind&nbsp;to,&nbsp;for</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;more&nbsp;details,&nbsp;see&nbsp;https://go.microsoft.com/fwlink/?linkid=2123754.</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">HttpPost</span>]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#569cd6;">async</span>&nbsp;<span style="color:#4ec9b0;">Task</span>&lt;<span style="color:#4ec9b0;">ActionResult</span>&lt;<span style="color:#4ec9b0;">Customer</span>&gt;&gt;&nbsp;<span style="color:#dcdcaa;">PostCustomer</span>(<span style="color:#4ec9b0;">Customer</span>&nbsp;<span style="color:#9cdcfe;">customer</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">PostCustomer</span>(<span style="color:#9cdcfe;">customer</span>);
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#dcdcaa;">CreatedAtAction</span>(<span style="color:#d69d85;">&quot;GetCustomer&quot;</span>,&nbsp;<span style="color:#569cd6;">new</span>&nbsp;&#123;&nbsp;id&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#9cdcfe;">customer</span><span style="color:#b4b4b4;">.</span>CustomerId&nbsp;&#125;,&nbsp;<span style="color:#9cdcfe;">customer</span>);
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//&nbsp;DELETE:&nbsp;api/Customers/5</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">HttpDelete</span>(<span style="color:#d69d85;">&quot;&#123;id&#125;&quot;</span>)]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">public</span>&nbsp;<span style="color:#569cd6;">async</span>&nbsp;<span style="color:#4ec9b0;">Task</span>&lt;<span style="color:#4ec9b0;">ActionResult</span>&lt;<span style="color:#4ec9b0;">Customer</span>&gt;&gt;&nbsp;<span style="color:#dcdcaa;">DeleteCustomer</span>(<span style="color:#569cd6;">int</span>&nbsp;<span style="color:#9cdcfe;">id</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">var</span>&nbsp;<span style="color:#9cdcfe;">customer</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">GetCustomer</span>(<span style="color:#9cdcfe;">id</span>);
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">if</span>&nbsp;(<span style="color:#9cdcfe;">customer</span>&nbsp;<span style="color:#b4b4b4;">==</span>&nbsp;<span style="color:#569cd6;">null</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#dcdcaa;">NotFound</span>();
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">DeleteCustomer</span>(<span style="color:#9cdcfe;">customer</span>);
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#9cdcfe;">customer</span>;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">Route</span>(<span style="color:#d69d85;">&quot;exists/&#123;id&#125;&quot;</span>)]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#4ec9b0;">HttpGet</span>]
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">private</span>&nbsp;<span style="color:#569cd6;">async</span>&nbsp;<span style="color:#4ec9b0;">Task</span>&lt;<span style="color:#569cd6;">bool</span>&gt;&nbsp;<span style="color:#dcdcaa;">CustomerExists</span>(<span style="color:#569cd6;">int</span>&nbsp;<span style="color:#9cdcfe;">id</span>)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">var</span>&nbsp;<span style="color:#9cdcfe;">customer</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">await</span>&nbsp;_customerService<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">GetCustomer</span>(<span style="color:#9cdcfe;">e</span>&nbsp;<span style="color:#b4b4b4;">=&gt;</span>&nbsp;<span style="color:#9cdcfe;">e</span><span style="color:#b4b4b4;">.</span>CustomerId<span style="color:#b4b4b4;">.</span><span style="color:#dcdcaa;">Equals</span>(<span style="color:#9cdcfe;">id</span>));
+         
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#9cdcfe;">customer</span>&nbsp;<span style="color:#b4b4b4;">!=</span>&nbsp;<span style="color:#569cd6;">null</span>;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+        &nbsp;&nbsp;&nbsp;&nbsp;&#125;
+        &#125;
+        </pre>
+</body>
+</html>
