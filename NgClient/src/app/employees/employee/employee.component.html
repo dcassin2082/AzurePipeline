@@ -1,0 +1,190 @@
+<!-- <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div> -->
+ 
+<!-- 
+***************************************************************************************************
+************************************************************************************************* -->
+
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off" class="crud-form">
+    <input type="hidden" name="EmployeeId" #EmployeeId="ngModel" [(ngModel)]="employeeService.employee.EmployeeId">
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <label class="form-label">Employee Name:</label>
+        <input name="FullName" #FullName="ngModel" [(ngModel)]="employeeService.employee.FullName" placeholder="Employee Name"required class="form-control">
+        <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">Required</div>
+      </div>
+      <div class="col-md-6">
+          <label class="form-label">Position:</label>
+          <input name="Position" #Position="ngModel" [(ngModel)]="employeeService.employee.Position" placeholder="Employee Name"required class="form-control">
+          <div class="validation-error" *ngIf="Position.invalid && Position.touched">Required</div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-6">
+          <label class="form-label">EMP Code:</label>
+          <input name="Empcode" #Empcode="ngModel" [(ngModel)]="employeeService.employee.Empcode" placeholder="EMP Code"required class="form-control">
+          <div class="validation-error" *ngIf="Empcode.invalid && Empcode.touched">Required</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Mobile:</label>
+            <input name="Mobile" #Mobile="ngModel" [(ngModel)]="employeeService.employee.Mobile" placeholder="Mobile"required class="form-control">
+            <div class="validation-error" *ngIf="Mobile.invalid && Mobile.touched">Required</div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 pb-2">
+          <button class="btn btn-block" type="submit" [disabled]="!form.valid">
+            <i class="fa fa-save"> Submit</i>
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-block" type="button" (click)="resetForm(form)">
+            <i class="fa fa-repeat"> Reset</i>
+          </button>
+        </div>
+      </div>
+  </form>
+  <div class="row mb-2">
+    <div class="col">
+      <div id="wrapper">
+        <div class="line"></div>
+        <div class="textbox">
+          <div class="text div-portfolio"> Microsoft Visual Studio</div>
+        </div>
+      </div>
+      <div class="awesome-sm">
+        <p class="pm-bottom">&#9656; Currently working with Visual Studio 2019. Ever since my first exposure to Visual
+          Basic 6.0 back in the late 1990s, I have
+          always eagerly awaited the next version to be released: from Everett in 2003, to v2008 and the introduction of
+          LINQ to v2012 and MVC, to the current day and
+          .NET Core 3.1 with C# 8.0
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col">
+      <div id="wrapper">
+        <div class="line"></div>
+        <div class="textbox">
+          <div class="text div-portfolio">Angular CLI</div>
+        </div>
+      </div>
+      <div class="awesome-sm">
+        <p class="pm-bottom">&#9656; Using npm & Visual Studio Code: this is where I do all of my front-end development
+          since Angular 2, npm and typescript. Although it seems like a new Angular version
+          is released every few months, I have strived to keep my skills up to date and am currently on Version 9
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col">
+      <div id="wrapper">
+        <div class="line"></div>
+        <div class="textbox">
+          <div class="text div-portfolio">SQL Server</div>
+        </div>
+      </div>
+      <div class="awesome-sm">
+        <p class="pm-bottom">&#9656; My extensive database experience includes over ten years working with the following
+          tools: Microsoft SQL Server,
+          Azure SQL, Oracle SQL Developer, Stored Procedures, Functions, Views,
+          Indexes, Optimization</p>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col">
+      <div id="wrapper">
+        <div class="line"></div>
+        <div class="textbox">
+          <div class="text div-portfolio">Design, Testing, Security</div>
+        </div>
+      </div>
+      <div class="awesome-sm">
+        <p class="pm-bottom">&#9656; SOLID Design Principles, Service Oriented Architecture, Test Driven Development
+          Identity
+          Framework, OAuth 2.0,
+          JSON Web Tokens
+        </p>
+      </div>
+    </div>
+  </div>
+  <style>
+    .floatClear {
+      clear: both;
+    }
+  
+    #wrapper {
+      /* text-align: center; */
+      position: relative;
+    }
+  
+    #wrapper .line {
+      border-bottom: 1px solid #4a72b3;
+      position: absolute;
+      width: 100%;
+      top: 15px;
+    }
+  
+    #wrapper .textbox {
+      position: relative;
+      width: 100%;
+    }
+  
+    #wrapper .textbox .text {
+      background-color: white;
+      margin: 0px auto;
+      padding: 0px 10px;
+      text-align: center;
+      display: inline;
+      font-size: 24px;
+      color: #4a72b3;
+      font-weight: 500;
+      font-style: italic;
+    }
+  </style>

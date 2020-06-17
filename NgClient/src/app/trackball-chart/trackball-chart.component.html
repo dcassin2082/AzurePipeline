@@ -1,0 +1,51 @@
+<!-- <div class="container">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-bar-chart fa-sm"></i> Trackball Chart
+        </div>
+        <div class="card-body">
+            <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title'
+                [crosshair]='crosshair' [tooltip]='tooltip' [titleStyle]='titleStyle'>
+                <e-series-collection>
+                    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y' name='East' width=2
+                        [marker]='marker'>
+                    </e-series>
+                    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y1' name='South' width=2
+                        [marker]='marker'>
+                    </e-series>
+                    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y2' name='Central' width=2
+                        [marker]='marker'>
+                    </e-series>
+                    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y3' name='Mountain' width=2
+                        [marker]='marker'>
+                    </e-series>
+                    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y4' name='West' width=2
+                        [marker]='marker'></e-series>
+                </e-series-collection>
+            </ejs-chart>
+        </div>
+    </div>
+</div> --> 
+<div class="container-fluid">
+    <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
+        [tooltip]='tooltip' [titleStyle]='titleStyle'>
+        <e-series-collection>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y' name='Buffy' width=2 [marker]='marker'>
+            </e-series>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y1' name='Medge' width=2 [marker]='marker'>
+            </e-series>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y2' name='Callie' width=2
+                [marker]='marker'>
+            </e-series>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y3' name='Ira' width=2
+                [marker]='marker'>
+            </e-series>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y4' name='Ray' width=2 [marker]='marker'>
+            </e-series>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y5' name='Joelle' width=2 [marker]='marker'>
+            </e-series>
+            <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y6' name='Teagan' width=2 [marker]='marker'>
+            </e-series>
+        </e-series-collection>
+    </ejs-chart>
+</div>

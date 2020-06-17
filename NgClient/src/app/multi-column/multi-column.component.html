@@ -1,0 +1,47 @@
+<ejs-chart [legendSettings]='legendSettings' [tooltip]='tooltip' [primaryXAxis]='primaryXAxis'
+    [primaryYAxis]='primaryYAxis' [title]='title' [titleStyle]='titleStyle'>
+    <e-series-collection>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Buffy' name='Buffy' [marker]='marker'>
+        </e-series>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Medge' name='Medge' [marker]='marker'>
+        </e-series>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Callie' name='Callie' [marker]='marker'>
+        </e-series>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Ira' name='Ira' [marker]='marker'>
+        </e-series>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Ray' name='Ray' [marker]='marker'>
+        </e-series>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Joelle' name='Joelle' [marker]='marker'>
+        </e-series>
+        <e-series [dataSource]='chartData' type='Column' xName='month' yName='Teagan' name='Teagan' [marker]='marker'>
+        </e-series>
+    </e-series-collection>
+</ejs-chart>
+<!-- 
+      { month: "Feb", Buffy: 67, Medge: 44, Callie: 106, Ira: 110, Ray: 88, Joelle: 66, Teagan: 63 },
+      { month: "Mar", Buffy: 55, Medge: 101, Callie: 60, Ira: 44, Ray: 98, Joelle: 118, Teagan: 119 },
+      { month: "Apr", Buffy: 84, Medge: 45, Callie: 112, Ira: 95, Ray: 36, Joelle: 56, Teagan: 72 },
+      { month: "May", Buffy: 67, Medge: 64, Callie: 52, Ira: 48, Ray: 110, Joelle: 88, Teagan: 88 },
+      { month: "Jun", Buffy: 67, Medge: 101, Callie: 98, Ira: 99, Ray: 54, Joelle: 44, Teagan: 55 }       -->
+
+<!-- <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
+[tooltip]='tooltip' [titleStyle]='titleStyle'>
+<e-series-collection>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y' name='Buffy' width=2 [marker]='marker'>
+    </e-series>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y1' name='Medge' width=2 [marker]='marker'>
+    </e-series>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y2' name='Callie' width=2
+        [marker]='marker'>
+    </e-series>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y3' name='Ira' width=2
+        [marker]='marker'>
+    </e-series>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y4' name='Ray' width=2 [marker]='marker'>
+    </e-series>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y5' name='Joelle' width=2 [marker]='marker'>
+    </e-series>
+    <e-series [dataSource]='chartData' type='Line' xName='X' yName='Y6' name='Teagan' width=2 [marker]='marker'>
+    </e-series>
+</e-series-collection>
+</ejs-chart> -->

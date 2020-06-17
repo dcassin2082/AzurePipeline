@@ -1,0 +1,192 @@
+<style>
+    pre {
+        color: #1f5da9;
+        padding-left: 35px !important;
+    }
+
+    span {
+        padding-left: 25px;
+        color: rgba(114, 146, 160, 0.66);
+        font-weight: 500;
+    }
+
+    .json {
+        color: goldenrod;
+    }
+
+    h5 {
+        color: goldenrod;
+    }
+
+    .btn-link {
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        background: #dadada;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .c-sharp {
+        color: #1f5da9;
+        font-weight: 500;
+    }
+</style>
+<!-- <div class="card">
+        <div class="card-header div-center">
+            <h4>
+                Web API Shit
+            </h4>
+        </div>
+        <div class="card-body">
+            <pre style="font-size: 14px;font-weight:500;color:rgba(11, 34, 147, 0.687);">{{snippet}}</pre>
+            <pre style="font-size: 14px;font-weight:500;color:rgba(147, 11, 40, 0.687);">{{sql}}</pre>
+            <pre style="font-size: 14px;font-weight:500;color:rgba(68, 84, 144, 0.687);">{{typescript}}</pre>
+            <pre style="font-size: 14px;font-weight:500;color:rgba(121, 77, 44, 0.85);">{{html}}</pre>
+        </div>
+    </div> -->
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-header div-center">
+            <h4>
+                Creating the .NET Core API
+            </h4>
+        </div>
+        <div class="card-body" style="color: goldenrod;font-size:20px;">
+            <div class="row div-center">
+                <div class="col">
+                    Visual Studio 2019<br>.NET Core 3.1<br>ASP.NET Core Web Application<br> API Template<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+                    <small class="pull-right" style="color: rgb(142,137,137)">
+                        by Daniel Cassin
+                    </small>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        1 - Install the following nuget packages
+                        <span class="pull-right"><button class="btn btn-link"
+                                (click)="copyText('nuget')">Copy</button></span>
+                    </h5>
+                    <span>Using package manager console or Tools / Manage Nuget Packages ..</span>
+                    <pre id="nuget">
+                                {{nuget}}
+                            </pre>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        2 - Add connection strings<span class="pull-right"><button class="btn btn-link"
+                                (click)="copyText('pre1')">Copy</button></span>
+                    </h5>
+                    <span>
+                        In appsettings.json, add the following
+                    </span>
+                    <div class="row">
+                        <div class="col">
+                            <pre id="pre1">
+                            {{connStrings}} 
+                        </pre>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        3 - Scaffold DbContext <span class="pull-right"><button class="btn btn-link"
+                                (click)="copyText('pre2')">Copy</button></span>
+                    </h5>
+                    <span>
+                        In Package manager Console
+                    </span>
+                    <pre id="pre2">
+                        {{dbContext}}
+                    </pre>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        4 - Add db context to Startup.cs <span class="pull-right"><button class="btn btn-link"
+                                (click)="copyText('pre3')">Copy</button></span>
+                    </h5>
+                    <span>
+                        ConfigureServices method, add the following
+                    </span>
+                    <pre id="pre3">
+                        {{item4}}
+                    </pre>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        5 - Configure CORS
+                    </h5>
+                    <span class="span-instruction">In Startup.cs / ConfigureServices method, add the
+                        following</span><span class="pull-right"><button class="btn btn-link"
+                            (click)="copyText('pre4')">Copy</button></span>
+                    <pre id="pre4">
+                            {{item5}}
+                        </pre>
+                    <hr>
+                    <span>Add the following to Configure method</span><span class="pull-right"><button
+                            class="btn btn-link" (click)="copyText('pre5')">Copy</button></span>
+                    <pre id="pre5">
+                        {{item6}}
+                    </pre>
+                    <hr>
+                    <span>Add the following to appsettings.json</span> <span class="pull-right"><button
+                            class="btn btn-link" (click)="copyText('pre6')">Copy</button></span>
+                    <pre id="pre6">
+                        {{item7}}
+                    </pre>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        6 - Configure JSON naming conventions <span class="pull-right"><button class="btn btn-link"
+                                (click)="copyText('pre7')">Copy</button></span>
+                    </h5>
+                    <span>
+                        Add the following to ConfigureServices
+                    </span>
+                    <pre id="pre7">
+                            {{item8}}
+                        </pre>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        7 - Remove connection string from source code (optional) <span class="pull-right"><button
+                                class="btn btn-link" (click)="copyText('pre8')">Copy</button></span>
+                    </h5>
+                    <span>
+                        In your dbcontext class, OnConfiguring method, replace the connection string with the following
+                    </span>
+                    <pre id="pre8">
+                            {{item9}}
+                        </pre>
+                </div>
+            </div>
+            <!-- <pre style="font-size: 14px;font-weight:500;color:rgba(11, 34, 147, 0.687);">{{snippet}}</pre>
+                <pre style="font-size: 14px;font-weight:500;color:rgba(147, 11, 40, 0.687);">{{sql}}</pre>
+                <pre style="font-size: 14px;font-weight:500;color:rgba(68, 84, 144, 0.687);">{{typescript}}</pre>
+                <pre style="font-size: 14px;font-weight:500;color:rgba(121, 77, 44, 0.85);">{{html}}</pre> -->
+        </div>
+    </div>
+</div>

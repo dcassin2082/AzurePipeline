@@ -1,0 +1,426 @@
+<style>
+    .col-detail {
+        color: #fff;
+        border: solid 1px #fff;
+        border-top: 0 !important;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .col-header {
+        border: solid 1px silver;
+        font-size: 20px;
+        font-weight: 500;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        text-align: center;
+        color: #fff;
+        background-color: rgba(51, 90, 112, 0.571);
+    }
+
+    input[type=select] {
+        padding: 0;
+    }
+
+    .lbl-emp {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .select-label {
+        padding: 0;
+        color: sandybrown;
+        font-style: italic;
+        margin: 0;
+    }
+
+    .tr-0 {
+        background: #DD8ABD;
+    }
+
+    .tr-1 {
+        background: #357CD2;
+    }
+
+    .tr-2 {
+        background: #404041;
+    }
+
+    .tr-3 {
+        background: #00BDAE;
+    }
+</style>
+<div class="container">
+    <div class="card">
+        <div class="card-header div-center">
+            <span class="api-title">
+                <h4>
+                    <i class="fa fa-suitcase "></i> Individual Sales Tracker
+                </h4>
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="row pad-left-20">
+                <div class="col-md-3">
+                    <label for="salesrep" class="control-label select-label">Filter by Sales Person</label>
+                    <select name="salesrep" id="salesrep" [(ngModel)]="salesTrackerService.employeeId"
+                        (change)="getEmployee($event.target.value)" class="form-control">
+                        <option value="-1">--Select--</option>
+                        <option *ngFor="let employee of salesTrackerService.employees" [value]="employee.EmployeeId">
+                            {{employee.FirstName}} {{employee.LastName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="dataSource">
+                <hr>
+                <!-- <div class="row">
+                    <div class="col" id='fuck'>
+                        <h4 class="div-center">
+                            {{employee?.FirstName}} {{employee?.LastName}}
+                        </h4>
+                        <p class="div-center" style="color: #fff;">
+                            <small>
+                                Sales History 2017 - Present
+                            </small>
+                        </p>
+                    </div>
+                </div> -->
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="pull-right custom-control custom-switch">
+                            <input id="switch2" type="checkbox" class="custom-control-input" #chkDetail
+                                (change)="setDetailChartType()">
+                            <label class="custom-control-label form-label" for="switch2">
+                                {{switchDetailChartType}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" *ngIf=!detailChecked>
+                    <div class="col">
+                        <ejs-chart #chart id="chart-container" [primaryXAxis]='primaryXAxis'
+                            [primaryYAxis]='primaryYAxis' [legendSettings]='legendSettings' [tooltip]='tooltip'
+                            [title]='title' [subTitle]='subTitle' [subTitleStyle]='subTitleStyle'
+                            [titleStyle]='titleStyle'>
+                            <e-series-collection>
+                                <e-series [dataSource]='dataSource' type='Area' xName='month' yName='sales'
+                                    name='Sales by Month' [marker]='marker' [fill]='fillColor' opacity=1.0>
+                                    <!-- fill='rgb(216, 113, 138)' opacity=0.8 -->
+                                </e-series>
+                            </e-series-collection>
+                        </ejs-chart>
+                    </div>
+                </div>
+                <div class="row mb-2" *ngIf="detailChecked">
+                    <div class="col">
+                        <div class="container">
+                            <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'
+                                [legendSettings]='legendSettings' [tooltip]='tooltip' [title]='title'
+                                [subTitle]='subTitle' [subTitleStyle]='subTitleStyle' [titleStyle]='titleStyle'>
+                                <e-series-collection>
+                                    <e-series [dataSource]='dataSource' type='Column' xName='month' yName='sales'
+                                        [fill]='fillColor' opacity=1.0 name='YTD Sales' [marker]='marker'></e-series>
+                                </e-series-collection>
+                            </ejs-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 offset-1" *ngIf="employee">
+                <div class="row mb-2 div-center">
+                    <div class="col">
+                        <span id="lblEmployeeDetails" class="demo-title-lg">
+                            Employee Details </span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-2 pb-2">
+                        <h6>Employee ID</h6>
+                        <p class="form-detail">{{employee.EmployeeId}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Employee Name</h6>
+                        <p class="form-detail">{{employee.FirstName}}
+                            {{employee.LastName}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Job Title</h6>
+                        <p class="form-detail">{{employee.JobTitle}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Department</h6>
+                        <p class="form-detail">{{employee.Department}}</p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-2 pb-2">
+                        <h6>Rate</h6>
+                        <p class="form-detail">{{employee.Rate | currency}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Payroll Status</h6>
+                        <p class="form-detail">{{employee.PayrollStatus}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Current Year</h6>
+                        <p class="form-detail">{{currentYear | currency}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>All Years</h6>
+                        <p class="form-detail">{{aggregateTotal | currency}}</p>
+                    </div>
+                </div>
+                <div class="row mb-2 div-center">
+                    <div class="col">
+                        <span id="lblSalesHistory" class="demo-title-lg">Employee Sales History</span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-11" *ngIf="employee">
+                        <div class="row">
+                            <div class="col-md-2 col-header">
+                                Year
+                            </div>
+                            <div class="col-md-2 col-header">
+                                Bikes
+                            </div>
+                            <div class="col-md-2 col-header">
+                                Components
+                            </div>
+                            <div class="col-md-2 col-header">
+                                Clothing
+                            </div>
+                            <div class="col-md-2 col-header">
+                                Accessories
+                            </div>
+                            <div class="col-md-2 col-header">
+                                Total
+                            </div>
+                        </div>
+                        <div class="row {{'tr-' + i}}" *ngFor="let sale of employeeSalesData;let i=index;"
+                            id="{{'tr-' + i}}">
+                            <div class="col-md-2 col-detail">
+                                {{sale.year}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{sale.bikes | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{sale.components | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{sale.clothing | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{sale.accessories | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{sale.total | currency}}
+                            </div>
+                        </div>
+                        <!-- <div class="row" style="background: #357CD2;color:#fff;">
+                            <div class="col-md-2 col-detail">
+                                2019
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 * 4 | currency}}
+                            </div>
+                        </div> -->
+                        <!-- 
+                        <div class="row" style="background: #404041;color:#fff;">
+                            <div class="col-md-2 col-detail">
+                                2018
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 * 4 | currency}}
+                            </div>
+                        </div>
+                        <div class="row" style="background: #00BDAE;color:#fff;">
+                            <div class="col-md-2 col-detail">
+                                2017
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 | currency}}
+                            </div>
+                            <div class="col-md-2 col-detail">
+                                {{166000 * 4 | currency}}
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container mt-2">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header div-center">
+                                Aggregate Team Sales
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <app-pie-chart></app-pie-chart>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <app-doughnut-chart></app-doughnut-chart>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+
+            <!-- <div class="row mt-2 div-center">
+                <div class="col" style="font-size:26px;color: sandybrown">
+                    <i class="fa fa-users fa-sm"></i> Aggregate Team Sales
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <app-pie-chart></app-pie-chart>
+                </div>
+                <div class="col-md-6">
+                    <app-doughnut-chart></app-doughnut-chart>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+
+</div>
+<div class="container mt-2">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header div-center">
+                    <span class="api-title">
+                        <h4>
+                            <i class="fa fa-suitcase "></i> Aggregate Team Sales
+                        </h4>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <ejs-chart [legendSettings]='legendSettings' [tooltip]='multiColumnTooltip'
+                                [primaryXAxis]='multiColumnXAxis' [primaryYAxis]='multiColumnYAxis'
+                                [title]='multiColumnTitle' [subTitle]='multiColumnSubTitle'
+                                [titleStyle]='multiColumnTitleStyle' [subTitleStyle]='multiColumnSubTitleStyle'>
+                                <e-series-collection>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Buffy'
+                                        name='Buffy' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Medge'
+                                        name='Medge' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Callie'
+                                        name='Callie' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Ira'
+                                        name='Ira' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Ray'
+                                        name='Ray' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Joelle'
+                                        name='Joelle' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='chartData' type='Column' xName='month' yName='Teagan'
+                                        name='Teagan' [marker]='multiColumnMarker'>
+                                    </e-series>
+                                </e-series-collection>
+                            </ejs-chart>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ejs-chart [primaryXAxis]='trackballXAxis' [primaryYAxis]='trackballYAxis'
+                                [title]='trackballTitle' [crosshair]='crosshair' [tooltip]='trackballTooltip'
+                                [titleStyle]='trackballTitleStyle'>
+                                <e-series-collection>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y' name='Buffy'
+                                        width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y1' name='Medge'
+                                        width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y2'
+                                        name='Callie' width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y3' name='Ira'
+                                        width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y4' name='Ray'
+                                        width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y5'
+                                        name='Joelle' width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                    <e-series [dataSource]='trackballData' type='Line' xName='X' yName='Y6'
+                                        name='Teagan' width=2 [marker]='trackballMarker'>
+                                    </e-series>
+                                </e-series-collection>
+                            </ejs-chart>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <app-pie-chart></app-pie-chart>
+                        </div>
+                        <div class="col">
+                            <app-doughnut-chart></app-doughnut-chart>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row mb-2">
+                        <div class="col">
+                            <div class="pull-right custom-control custom-switch">
+                                <input id="switch1" type="checkbox" class="custom-control-input" #chkSummary
+                                    (change)="setSummaryChartType()">
+                                <label class="custom-control-label form-label" for="switch1">
+                                    {{switchSummaryChartType}}</label>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

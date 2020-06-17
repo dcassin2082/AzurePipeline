@@ -1,0 +1,81 @@
+<style>
+  .slidecontainer {
+    width: 100%;
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 5px;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 250px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+</style>
+<div class="container">
+  <div class="card">
+    <div class="card-header div-center">
+      <span class="api-title">
+        <h4><i class="fa fa-history fa-white"></i> Customer Order History</h4>
+      </span></div>
+    <div class="card-body">
+      <div class="row div-center">
+        <div class="col">
+          <p style="font-family: Arial, Helvetica, sans-serif;color: sandybrown;font-size: 24px;">
+            Customer List</p>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <app-customer-list></app-customer-list>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <app-customer></app-customer>
+        </div>
+      </div>
+      <hr>
+     <div class="card div-center">
+       <div class="card-header">
+        <h4><i class="fa fa-history fa-white"></i> Preferred Customers</h4>
+       </div>
+       <div class="card-body">
+        <div class="row mb-2">
+          <div class="col">
+            <app-funnel-chart></app-funnel-chart>
+          </div>
+        </div>
+       </div>
+     </div>
+    </div>
+    <div class="card-footer">
+      <div class="row mb-4">
+
+      </div>
+    </div>
+  </div>
+</div>

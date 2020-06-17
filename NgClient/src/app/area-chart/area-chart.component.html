@@ -1,0 +1,12 @@
+<ejs-chart  #chart id="chart-container" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' 
+
+  [tooltip]='tooltip' [title]='title' [titleStyle]='titleStyle'>
+    <e-series-collection>
+        <e-series [dataSource]='items' type='Area' xName='month' yName='sales' name='Sales by Month' [marker]='marker' 
+         fill='rgb(186, 113, 138)' opacity=0.9></e-series>
+    </e-series-collection>
+</ejs-chart>
+
+<!-- fill='rgb(218, 218, 121)' opacity=0.3> -->
+
+

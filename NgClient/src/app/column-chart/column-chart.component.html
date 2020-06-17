@@ -1,0 +1,24 @@
+<!-- <div class="container">
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-bar-chart fa-sm"></i> Column Chart
+    </div>
+    <div class="card-body">
+      <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [legendSettings]='legendSettings'
+        [tooltip]='tooltip' [title]='title' [titleStyle]='titleStyle'>
+        <e-series-collection>
+          <e-series [dataSource]='items' type='Column' xName='DateString' yName='Sales' name='Daily Sales'
+            [marker]='marker'></e-series>
+        </e-series-collection>
+      </ejs-chart>
+    </div>
+  </div>
+</div> --> 
+<div class="container">
+  <ejs-chart [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [legendSettings]='legendSettings'
+  [tooltip]='tooltip' [title]='title' [titleStyle]='titleStyle'>
+  <e-series-collection>
+    <e-series [dataSource]='items' fill='rgb(218, 113, 138)' type='Column' xName='month' yName='sales' name='YTD Sales' [marker]='marker'></e-series>
+  </e-series-collection>
+</ejs-chart>
+</div>
